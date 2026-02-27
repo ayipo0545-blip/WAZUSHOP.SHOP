@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Wazushop | Bibles, High-Tech et Maison à Abidjan</title>
+    <meta name="description" content="Wazushop : La boutique en ligne n°1 à Abidjan. Bibles d'étude, iPhones, PlayStation et articles de maison. Livraison rapide et qualité garantie.">
+    <meta name="keywords" content="Boutique en ligne Abidjan, Bible Thompson Côte d'Ivoire, iPhone pas cher, Wazushop, achat en ligne Côte d'Ivoire, Bibles d'étude">
+    <meta name="author" content="Wazushop">
+
+    <meta property="og:title" content="Wazushop | L'achat simple et rapide">
+    <meta property="og:description" content="Découvrez nos Bibles et articles High-Tech au meilleur prix à Abidjan.">
+    <meta property="og:image" content="https://votre-lien-image-logo.jpg"> <meta property="og:url" content="https://votre-pseudo.github.io/wazushop/">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="https://votre-lien-favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">WAZU<span>SHOP</span></div>
+        </div>
+        <div class="nav-right">
+            <div class="cart-status" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">WAZUSHOP : L'ACHAT SIMPLE ET RAPIDE — LIVRAISON PARTOUT À ABIDJAN — QUALITÉ GARANTIE — CONTACTEZ-NOUS AU 07 08 73 73 07 — </div>
+            <div class="ticker-item">WAZUSHOP : L'ACHAT SIMPLE ET RAPIDE — LIVRAISON PARTOUT À ABIDJAN — QUALITÉ GARANTIE — CONTACTEZ-NOUS AU 07 08 73 73 07 — </div>
+        </div>
+    </div>
+
+    <div class="promo-banner">
+        <div class="promo-content">
+            <i class="fas fa-star"></i>
+            <span>NOUVEAUTÉ : Découvrez nos Bibles d'Étude à partir de 8 000 F !</span>
+            <button onclick="filterCategory('bible')">VOIR LES BIBLES</button>
+        </div>
+    </div>
+
+    <div class="header-tools">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Rechercher un article ou une Bible...">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="categories-container">
+            <button class="filter-btn active" onclick="filterCategory('all')">Tout</button>
+            <button class="filter-btn" onclick="filterCategory('bible')">
+                <i class="fas fa-book-open"></i> Bibles
+            </button>
+            <button class="filter-btn" onclick="filterCategory('tech')">Électronique</button>
+            <button class="filter-btn" onclick="filterCategory('home')">Maison</button>
+            <button class="filter-btn" onclick="filterCategory('access')">Accessoires</button>
+        </div>
+    </div>
+
+    <section class="slider-container">
+        <div class="slider">
+            <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1200');">
+                <div class="slide-content"><h1>WAZUSHOP</h1><p>Les meilleurs prix du marché.</p></div>
+            </div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.pexels.com/photos/4210339/pexels-photo-4210339.jpeg?auto=compress&cs=tinysrgb&w=1200');">
+                <div class="slide-content"><h1>RAPIDITÉ</h1><p>Votre commande livrée en un temps record.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">Nos Articles</h2>
+        <div class="product-grid" id="product-list">
+            </div>
+        <div id="load-more-container" style="text-align:center; margin-top:30px;">
+            <button onclick="loadMore()" class="btn-load" style="padding: 12px 25px; cursor: pointer; background: var(--dark); color: white; border-radius: 5px; border: none;">VOIR PLUS D'ARTICLES</button>
+        </div>
+    </main>
+
+    <section id="contact-section">
+        <div class="container">
+            <h2 class="section-title">Besoin d'aide ? Contactez-nous</h2>
+            <div class="contact-wrapper">
+                <form class="contact-form" onsubmit="sendContactWA(event)">
+                    <input type="text" id="contact-name" placeholder="Votre Nom complet" required>
+                    <textarea id="contact-msg" rows="4" placeholder="Quel produit cherchez-vous ?" required></textarea>
+                    <button type="submit" class="btn-send">
+                        <i class="fab fa-whatsapp"></i> Envoyer sur WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Mon Panier</h3>
+            <button onclick="toggleCart()" class="close-btn" style="background:none; border:none; color:white; font-size:2rem; cursor:pointer;">&times;</button>
+        </div>
+        <div id="cart-items" style="flex:1; overflow-y:auto; padding:20px;">
+            </div>
+        <div class="cart-footer" style="padding:20px; border-top:1px solid #eee;">
+            <div class="cart-total" style="font-weight:bold; font-size:1.2rem; margin-bottom:15px;">Total: <span id="cart-total-val">0</span> F</div>
+            <button onclick="clearCart()" style="width:100%; margin-bottom:10px; padding:10px; cursor:pointer; border:1px solid #ddd; background:white;">VIDER LE PANIER</button>
+            <button class="btn-whatsapp-order" onclick="sendWhatsApp()" style="width:100%; background:var(--whatsapp); color:white; padding:12px; border:none; font-weight:bold; cursor:pointer; border-radius:5px;">
+                CONFIRMER LA COMMANDE
+            </button>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="logo">WAZU<span>SHOP</span></div>
+        <p>L'ACHAT SIMPLE ET RAPIDE</p>
+        <p>📍 Abidjan, Côte d'Ivoire</p>
+        <p>📞 07 08 73 73 07</p>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">&copy; 2026 Wazushop. Tous droits réservés.</p>
+    </footer>
+
+    <a href="https://wa.me/2250708737307" class="floating-wa" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
